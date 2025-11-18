@@ -75,3 +75,5 @@ Other top-level files:
 - Tailwind CSS docs: https://tailwindcss.com/docs
 - Biome docs: https://biomejs.dev/
 - TypeScript Handbook: https://www.typescriptlang.org/docs/
+- Next.js AI SDK docs: https://ai-sdk.dev/docs/
+
