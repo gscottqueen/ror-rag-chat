@@ -23,30 +23,25 @@ This is a **shared .github repository** for the `scottqueen-bixal` organization 
 - **Project Maintainers** setting up new repositories
 - **Contributors** following organization standards
 
-## Tech Stack
+### Tech Stack
 
-### Documentation & Templates
-- **Markdown** for all documentation and instruction files
-- **YAML** frontmatter for configuration and metadata
-- **GitHub Templates** for issues, PRs, and chat modes
+- **Next.js (App Router)** — project source is in `src/app/` (Next 16+ patterns)
+- **React** 19, **TypeScript** (strict), **Tailwind CSS** (v4) for styling
+- **Biome** for linting/formatting
+- **Bun** as the recommended runtime & package manager
 
-### Development Standards
-- **TypeScript** guidelines with strict mode and Next.js patterns
-- **Accessibility (A11Y)** following WCAG 2.2 AA standards
-- **Security** implementing OWASP best practices
-- **Feature Development** with human-in-the-loop workflows
+### Tools & Platforms
 
-### AI Assistant Integration
-- **Prompt Engineering** - Structured prompts for consistent AI interactions
-- **Chat Modes** - Specialized AI assistant configurations
-- **Agent Workflows** - Multi-step automated development processes
+- **GitHub** for repo hosting and CI (workflows live in `.github/workflows/`)
+- **GitHub Actions** — use `oven-sh/setup-bun` in CI when switching to Bun
+- **Local dev**: `bun run dev`, `bun run build`, `bun run start`, `bun run lint`, `bun run format`
 
 ## Repository Structure
 
 ```
-.github/
-├── chatmodes/                    # AI assistant chat mode configs
-│   └── Feature.chatmode.md       # Feature development mode
+.github/                        # GitHub-specific
+├── agents/                      # AI assistant agent configs
+│   └── Feature.agent.md         # Feature development mode
 ├── ISSUE_TEMPLATE/              # GitHub issue templates
 │   └── feature.md               # Feature request template
 ├── prompts/                     # AI assistant prompts
