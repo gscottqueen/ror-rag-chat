@@ -1,5 +1,5 @@
 ---
-applyTo: "**/*.{ts,tsx,js,jsx,md,html,json,css,scss,env,env.example}"
+applyTo: "**/*.{ts,tsx}"
 ---
 
 # Next.js Assistant Instructions
@@ -47,9 +47,9 @@ Other top-level files:
 - Prefer server components by default in `*.tsx` files under `src/app/`. Use `'use client'` only when necessary for client-side interactivity.
 
 ### Tooling & Scripts
-- Use `npm run dev` to start the dev server locally.
-- Use `npm run build` and `npm run start` for production verification.
-- Run `npm run lint` to check code style and `npm run format` to auto-format using Biome.
+- Prefer `bun dev` / `bun run dev` to start the dev server locally (`bun` is recommended).
+- Prefer `bun run build` and `bun run start` for production verification.
+- Run `bun run lint` to check code style and `bun run format` to auto-format using Biome. npm/yarn/pnpm remain supported via `npm run`/`yarn`/`pnpm`.
 
 ### Next.js AI SDK
 - When integrating LLMs or AI features, prefer using the Next.js AI SDK patterns so model calls are made from server-side code (server components, server actions, or API/route handlers) to avoid exposing secrets.
