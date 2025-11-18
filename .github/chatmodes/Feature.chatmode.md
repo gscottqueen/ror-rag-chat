@@ -1,6 +1,7 @@
 ---
 description: Generate an implementation plan for new features or refactoring existing code.
-tools: ['search/codebase', 'fetch','githubRepo', 'search', 'usages', 'github/*', 'github/create_issue']
+#tools: ['search/codebase', 'fetch','githubRepo', 'search', 'usages', 'github/*', 'github/create_issue']
+tools: ['search', 'chrome-devtools/*', 'next-devtools/*', 'usages', 'changes', 'fetch', 'githubRepo', 'todos']
 ---
 
 # Planning mode instructions
@@ -12,7 +13,7 @@ You are in planning mode. Your task is to generate an implementation plan for a 
 - Never make any code edits, just generate a plan.
 - The implementation plan must be generated in `.backups/feature/`.
 - Always use `features.instructions.md` for generating the implementation plan.
-- Always use the feature.md template `.github/ISSUE_TEMPLATE/feature.md` to create the plan.
+<!-- - Always use the feature.md template `.github/ISSUE_TEMPLATE/feature.md` to create the plan. -->
 - create a todolist based on the discussion details below.
 
 ## Discuss for approval before proceeding with adding to the feature document:
