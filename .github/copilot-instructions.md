@@ -1,21 +1,18 @@
-# Copilot Instructions for .github Repository
+# Copilot Instructions for ror-rag-chat Repository
 
 ## Project Overview
 
-This is a **shared .github repository** for the `scottqueen-bixal` organization that provides standardized GitHub templates, development workflows, and AI assistant configurations. It contains comprehensive development instructions, prompt templates, issue templates, and chat modes for consistent project management across all repositories in the organization.
+This is a **Next.js application** for building a RAG (Retrieval-Augmented Generation) chat system. The project is currently in its early stages, using the latest Next.js 16 with App Router, React 19, and modern tooling for a robust, scalable web application.
 
 ## Critical
 - Always be extremely concise. Never overcomplicate when simplicity will do.
-- This repository provides templates and instructions for OTHER projects, not application code itself.
-- When working with this repo, focus on template creation, instruction refinement, and workflow improvement.
 
 ## Repository Purpose
 
 ### Core Functions
-- **Development Instructions** - Language-specific coding guidelines (TypeScript, Security, Accessibility, Features)
-- **AI Assistant Prompts** - Standardized prompts for feature development, code breakdown, and onboarding
-- **GitHub Templates** - Issue templates, PR templates, and chat mode configurations
-- **Workflow Definitions** - Reusable development processes and best practices
+- **RAG Chat Interface** - Web-based chat application with retrieval-augmented generation capabilities
+- **Modern Web App** - Built with Next.js App Router for optimal performance and SEO
+- **Type-Safe Development** - Full TypeScript integration with strict mode enabled
 
 ### Target Users
 - **AI Coding Assistants** (GitHub Copilot, Claude, etc.)
@@ -25,79 +22,144 @@ This is a **shared .github repository** for the `scottqueen-bixal` organization 
 
 ### Tech Stack
 
-- **Next.js (App Router)** — project source is in `src/app/` (Next 16+ patterns)
-- **React** 19, **TypeScript** (strict), **Tailwind CSS** (v4) for styling
-- **Biome** for linting/formatting
-- **Bun** as the recommended runtime & package manager
+- **Next.js 16.0.3 (App Router)** — Latest version with React Compiler enabled
+- **React 19.2.0** — Modern React with concurrent features
+- **TypeScript 5** — Strict mode, with path aliases (`@/*` for `./src/*`)
+- **Tailwind CSS v4** — Utility-first CSS framework with PostCSS
+- **Biome 2.2.0** — Fast linting and formatting tool
+- **Bun 1.0.0** — Recommended runtime and package manager
 
 ### Tools & Platforms
 
-- **GitHub** for repo hosting and CI (workflows live in `.github/workflows/`)
-- **GitHub Actions** — use `oven-sh/setup-bun` in CI when switching to Bun
-- **Local dev**: `bun run dev`, `bun run build`, `bun run start`, `bun run lint`, `bun run format`
+- **GitHub** for version control and CI/CD
+- **Local dev**: `bun run dev` (starts dev server), `bun run build`, `bun run start`
+- **Linting/Formatting**: `bun run lint`, `bun run format`
+- **VS Code** with MCP configuration for enhanced development
 
 ## Repository Structure
 
 ```
-.github/                        # GitHub-specific
-├── agents/                      # AI assistant agent configs
-│   └── Feature.agent.md         # Feature development mode
-├── ISSUE_TEMPLATE/              # GitHub issue templates
-│   └── feature.md               # Feature request template
-├── prompts/                     # AI assistant prompts
-│   ├── new-feature.prompt.md    # Feature development workflow
-│   ├── breakdown.prompt.md      # Code explanation prompts
-│   ├── create-instructions.prompt.md # Instruction file creation
-│   └── gen-copilot-instructions.prompt.md # This file generator
+.github/                        # GitHub templates and instructions
 ├── instructions/                # Development guidelines
-│   ├── a11y.instructions.md     # Accessibility guidelines
+│   ├── a11y.instructions.md     # Accessibility standards
 │   ├── features.instructions.md # Feature development process
 │   ├── security.instructions.md # Security best practices
-│   └── ts.instructions.md       # TypeScript standards
-├── copilot-instructions.md      # This file - main AI assistant guide
+│   └── next-js.instructions.md  # Next.js specific guidelines
+├── prompts/                     # AI assistant prompts
+├── copilot-instructions.md      # This file
 └── pull_request_template.md     # PR template
-README.md                        # Simple repository description
+src/                             # Application source code
+├── app/                         # Next.js App Router pages
+│   ├── globals.css              # Global styles with Tailwind
+│   ├── layout.tsx               # Root layout component
+│   └── page.tsx                 # Home page component
+├── components/                  # Reusable React components
+│   └── ChatInput.tsx            # Chat input component
+public/                          # Static assets
+biome.json                       # Biome configuration
+next.config.ts                   # Next.js configuration
+package.json                     # Dependencies and scripts
+postcss.config.mjs               # PostCSS configuration
+tsconfig.json                    # TypeScript configuration
 ```
 
 ## Key Files
 
-### Core Configuration
-- `.github/copilot-instructions.md` - Main AI assistant guidance (this file)
-- `.github/pull_request_template.md` - Standard PR template
-- `README.md` - Repository overview
+### Core Application
+- `src/app/page.tsx` - Main home page component with chat interface
+- `src/app/layout.tsx` - Root layout with metadata and fonts
+- `src/app/globals.css` - Global CSS with Tailwind imports
+- `src/components/ChatInput.tsx` - Reusable chat input component
+
+### Configuration
+- `package.json` - Project metadata, dependencies, and scripts
+- `next.config.ts` - Next.js config with React Compiler enabled
+- `tsconfig.json` - TypeScript config with strict mode and path aliases
+- `biome.json` - Linting and formatting rules
+- `postcss.config.mjs` - PostCSS setup for Tailwind
 
 ### Development Instructions
+- `.github/instructions/security.instructions.md` - Security implementation guidelines
 - `.github/instructions/features.instructions.md` - Feature development workflow
-- `.github/instructions/security.instructions.md` - Security implementation guidelines  
 - `.github/instructions/a11y.instructions.md` - Accessibility standards
-- `.github/instructions/ts.instructions.md` - TypeScript development rules
-
-### AI Assistant Prompts
-- `.github/prompts/new-feature.prompt.md` - Structured feature development
-- `.github/prompts/breakdown.prompt.md` - Code explanation generator
-- `.github/prompts/create-instructions.prompt.md` - Instruction file creator
-- `.github/prompts/gen-copilot-instructions.prompt.md` - This file generator
-
-### Templates & Workflows
-- `.github/ISSUE_TEMPLATE/feature.md` - Feature request template
-- `.github/chatmodes/Feature.chatmode.md` - Feature planning chat mode
+- `.github/instructions/next-js.instructions.md` - Next.js specific rules
 
 ## Development Guidelines
 
-### Working with Instructions
-- All instruction files use YAML frontmatter with `applyTo` patterns to specify which file types they apply to
-- Instructions target specific file types (e.g., `**/*.{ts,tsx}`) or all files (`**/*`)
-- Follow the established template structure for consistency: Goal → Essentials → Tech Stack → Project Structure → Key Files → Development Guidelines → Reference Resources
-- Update instructions when development practices change
-- External URL references in Markdown may trigger linting warnings but are acceptable for documentation
+### Getting Started
+1. Install dependencies: `bun install`
+2. Start dev server: `bun run dev`
+3. Open [http://localhost:3000](http://localhost:3000)
+4. Edit files in `src/app/` - changes auto-reload
 
-### Creating New Templates
-- Use `.md` extension for all template files
-- Include YAML frontmatter for metadata
-- Follow naming conventions: `name.type.md` (e.g., `feature.md`, `Feature.chatmode.md`)
-- Test templates with real use cases before committing
+### Code Quality
+- **Linting**: Run `bun run lint` to check code quality with Biome
+- **Formatting**: Run `bun run format` to auto-format code
+- **TypeScript**: Strict mode enabled - all code must be type-safe
+- **Imports**: Use `@/*` alias for imports from `src/`
 
-### AI Assistant Integration
+### Styling
+- Use Tailwind CSS classes for styling
+- Follow utility-first approach
+- Dark mode support with `dark:` prefixes
+- Custom CSS variables defined in `globals.css`
+
+### Build & Deploy
+- Build: `bun run build`
+- Start production: `bun run start`
+- Deploy to Vercel or any Node.js hosting platform
+
+### Security & Best Practices
+- Follow OWASP guidelines referenced in security instructions
+- Validate all inputs and sanitize outputs
+- Use HTTPS in production
+- Regular dependency updates and security scans
+
+## Common Workflows
+
+### Adding New Features
+1. Reference `features.instructions.md` for development process
+2. Create components in `src/components/` for reusability
+3. Update routing in `src/app/` for new pages
+4. Test with `bun run dev` and validate with `bun run lint`
+
+### Code Changes
+1. Make changes to TypeScript/TSX files
+2. Run `bun run format` to format code
+3. Run `bun run lint` to check for issues
+4. Test functionality in browser
+5. Commit with descriptive messages
+
+### Dependency Management
+- Use `bun add` to install new packages
+- Update `package.json` and commit lockfile changes
+- Run security audits regularly
+
+## Usage Examples
+
+### For AI Assistants
+When working on this repository, you should:
+- Read relevant instruction files before implementing features
+- Use Bun commands for all package management and scripts
+- Follow TypeScript strict mode and Biome rules
+- Reference security guidelines for any user-facing features
+- Test changes locally before suggesting commits
+
+### For Developers
+When contributing to this project:
+- Follow the established coding standards
+- Use the provided scripts for development workflow
+- Reference instruction files for specific guidelines
+- Ensure all changes pass linting and formatting
+- Test thoroughly before submitting PRs
+
+### For Project Setup
+When setting up the development environment:
+- Install Bun runtime
+- Clone repository and run `bun install`
+- Start with `bun run dev`
+- Configure VS Code with MCP if available
+- Review all instruction files for development standards
 - Prompts should be self-contained and context-aware
 - Include clear goals, limitations, and expected outputs
 - Reference relevant instruction files for consistency
