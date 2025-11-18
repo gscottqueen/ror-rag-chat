@@ -1,5 +1,6 @@
 ---
-mode: agent
+agent: Feature
+description: 'Generate a new feature implementation plan and code changes'
 ---
 
 # New Feature Request
