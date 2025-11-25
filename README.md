@@ -1,47 +1,101 @@
-This is a Next.js application for building a RAG (Retrieval-Augmented Generation) chat system, featuring a modern web app with App Router, TypeScript, and Tailwind CSS.
+# ROR RAG Chat
+
+A Next.js application for building a RAG (Retrieval-Augmented Generation) chat system, featuring a modern web app with App Router, TypeScript, and Tailwind CSS.
 
 ## Project Overview
 
-This project is a monorepo with multiple services:
+This is a monorepo with multiple services:
 
-- **Main Frontend**: Next.js 16 app in `src/` (runs on port 3000)
-- **Auth Frontend**: Authentication UI in `frontend/` (runs on port 3001)
-- **API Backend**: Node.js API in `api/` (runs on port 8000)
-- **Database**: PostgreSQL via Docker
+- **Main Frontend**: Next.js 16.0.3 app in `src/` (port 3000) - Uses Bun
+- **Auth Frontend**: Next.js 15.3.5 authentication UI in `auth/frontend/` (port 3001) - Uses npm
+- **Auth API**: Node.js/Express 5.1.0 backend in `auth/api/` (port 8000)
+- **Database**: PostgreSQL 15 Alpine via Docker (port 5432)
 
-For full setup with all services, see [DOCKER.md](./DOCKER.md).
+For full Docker setup with all services, see [DOCKER.md](./DOCKER.md).
+
+## Tech Stack
+
+**Main Application**:
+- Next.js 16.0.3 with App Router
+- React 19.2.0
+- TypeScript 5 (strict mode)
+- Tailwind CSS v4
+- Biome 2.2.0 (linting & formatting)
+- Bun 1.0.0 (package manager)
+
+**Auth Services**:
+- Next.js 15.3.5 (frontend)
+- Express 5.1.0 (API)
+- PostgreSQL 15 (database)
+- Knex.js (migrations)
 
 ## Getting Started
 
-First, run the development server (using Bun is recommended):
+### Main App Development
+
+Using Bun (recommended):
 
 ```bash
+bun install
 bun dev
-# or
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Or with npm/yarn/pnpm:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000) to view the app.
+
+Edit `src/app/page.tsx` to modify the home page - changes auto-reload with Fast Refresh.
+
+### Available Scripts
+
+- `bun dev` - Start development server
+- `bun run build` - Build for production
+- `bun run start` - Run production server
+- `bun run lint` - Lint code with Biome
+- `bun run format` - Format code with Biome
+
+### Full Stack with Docker
+
+To run all services (frontend, auth, API, database):
+
+```bash
+docker compose up --build
+```
+
+See [DOCKER.md](./DOCKER.md) for detailed Docker setup instructions.
+
+## Project Structure
+
+```
+src/                    # Main Next.js app
+├── app/                # App Router pages
+│   ├── layout.tsx      # Root layout
+│   ├── page.tsx        # Home page
+│   └── globals.css     # Global styles
+└── components/         # Reusable components
+
+auth/                   # Authentication services
+├── frontend/           # Auth UI (Next.js)
+├── api/                # Auth API (Node.js/Express)
+└── docker-compose.yml  # Auth services orchestration
+
+.github/                # GitHub configuration
+├── instructions/       # Development guidelines
+└── prompts/            # AI assistant prompts
+
+biome.json              # Biome configuration
+next.config.ts          # Next.js configuration
+tsconfig.json           # TypeScript configuration
+docker-compose.yml      # Root Docker orchestration
+```
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js Documentation](https://nextjs.org/docs) - Learn about Next.js features
+- [Next.js GitHub](https://github.com/vercel/next.js) - Contribute to Next.js
+- [DOCKER.md](./DOCKER.md) - Full Docker setup guide
