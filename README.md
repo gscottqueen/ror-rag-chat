@@ -1,4 +1,15 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a Next.js application for building a RAG (Retrieval-Augmented Generation) chat system, featuring a modern web app with App Router, TypeScript, and Tailwind CSS.
+
+## Project Overview
+
+This project is a monorepo with multiple services:
+
+- **Main Frontend**: Next.js 16 app in `src/` (runs on port 3000)
+- **Auth Frontend**: Authentication UI in `frontend/` (runs on port 3001)
+- **API Backend**: Node.js API in `api/` (runs on port 8000)
+- **Database**: PostgreSQL via Docker
+
+For full setup with all services, see [DOCKER.md](./DOCKER.md).
 
 ## Getting Started
 
