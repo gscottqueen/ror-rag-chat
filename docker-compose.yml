@@ -31,6 +31,7 @@ services:
     environment:
       - NODE_ENV=production
       - API_URL=http://auth-api:8000
+      - API_KEY=${API_KEY}
     depends_on:
       auth-api:
         condition: service_healthy
@@ -53,6 +54,7 @@ services:
       - DB_NAME=${DB_NAME:-nodejs_app}
       - DB_USER=${DB_USER:-postgres}
       - DB_PASSWORD=${DB_PASSWORD:-postgres}
+      - API_KEY=${API_KEY}
     volumes:
       - ./auth/api:/app
       - /app/node_modules
