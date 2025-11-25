@@ -38,6 +38,8 @@ This is a **Next.js application** for building a RAG (Retrieval-Augmented Genera
 
 ## Repository Structure
 
+This is a monorepo with multiple services:
+
 ```
 .github/                        # GitHub templates and instructions
 ├── instructions/                # Development guidelines
@@ -48,38 +50,64 @@ This is a **Next.js application** for building a RAG (Retrieval-Augmented Genera
 ├── prompts/                     # AI assistant prompts
 ├── copilot-instructions.md      # This file
 └── pull_request_template.md     # PR template
-src/                             # Application source code
+src/                             # Main Next.js application source code
 ├── app/                         # Next.js App Router pages
 │   ├── globals.css              # Global styles with Tailwind
 │   ├── layout.tsx               # Root layout component
 │   └── page.tsx                 # Home page component
 ├── components/                  # Reusable React components
 │   └── ChatInput.tsx            # Chat input component
-public/                          # Static assets
-biome.json                       # Biome configuration
-next.config.ts                   # Next.js configuration
-package.json                     # Dependencies and scripts
+public/                          # Static assets for main app
+auth/                            # Authentication services
+├── api/                         # Node.js authentication API
+│   ├── src/                     # API source code
+│   ├── package.json             # API dependencies
+│   └── docker-compose.yml       # API Docker setup
+├── frontend/                    # Auth frontend (Next.js)
+│   ├── src/                     # Auth UI source code
+│   ├── package.json             # Auth frontend dependencies
+│   └── docker-compose.yml       # Auth frontend Docker setup
+└── docker-compose.yml           # Auth services orchestration
+api/                             # (Note: API is under auth/)
+frontend/                        # Additional frontend (Next.js setup)
+├── src/                         # Frontend source code
+├── package.json                 # Frontend dependencies
+└── docker-compose.yml           # Frontend Docker setup
+biome.json                       # Biome configuration (root)
+next.config.ts                   # Next.js configuration (root)
+package.json                     # Main app dependencies and scripts
 postcss.config.mjs               # PostCSS configuration
 tsconfig.json                    # TypeScript configuration
+docker-compose.yml               # Root Docker orchestration
+DOCKER.md                        # Docker setup documentation
+README.md                        # Project README
 ```
 
-## Key Files
+### Key Files
 
-### Core Application
+#### Core Application (Main Frontend)
 - `src/app/page.tsx` - Main home page component with chat interface
 - `src/app/layout.tsx` - Root layout with metadata and fonts
 - `src/app/globals.css` - Global CSS with Tailwind imports
 - `src/components/ChatInput.tsx` - Reusable chat input component
 
-### Configuration
-- `package.json` - Project metadata, dependencies, and scripts
-- `next.config.ts` - Next.js config with React Compiler enabled
-- `tsconfig.json` - TypeScript config with strict mode and path aliases
-- `biome.json` - Linting and formatting rules
+#### Configuration
+- `package.json` - Main app metadata, dependencies, and scripts
+- `next.config.ts` - Next.js config with React Compiler enabled and standalone output
+- `tsconfig.json` - TypeScript config with strict mode and path aliases (`@/*` for `./src/*`)
+- `biome.json` - Linting and formatting rules (2-space indentation, recommended rules)
 - `postcss.config.mjs` - PostCSS setup for Tailwind
 
-### Development Instructions
-- `.github/instructions/security.instructions.md` - Security implementation guidelines
+#### Docker and Deployment
+- `docker-compose.yml` - Orchestrates all services (main frontend, auth API, auth frontend, database)
+- `DOCKER.md` - Detailed Docker setup instructions
+- `auth/docker-compose.yml` - Auth services orchestration
+- `auth/api/package.json` - Auth API dependencies (Node.js with Knex, etc.)
+- `auth/frontend/package.json` - Auth frontend dependencies (Next.js with npm)
+- `frontend/package.json` - Additional frontend dependencies
+
+#### Development Instructions
+- `.github/instructions/security.instructions.md` - Security implementation guidelines (OWASP, input validation, etc.)
 - `.github/instructions/features.instructions.md` - Feature development workflow
 - `.github/instructions/a11y.instructions.md` - Accessibility standards
 - `.github/instructions/next-js.instructions.md` - Next.js specific rules
@@ -91,6 +119,10 @@ tsconfig.json                    # TypeScript configuration
 2. Start dev server: `bun run dev`
 3. Open [http://localhost:3000](http://localhost:3000)
 4. Edit files in `src/app/` - changes auto-reload
+
+For full stack development (with auth, API, database):
+1. Follow `DOCKER.md` for environment setup
+2. Run `docker compose up --build` to start all services
 
 ### Code Quality
 - **Linting**: Run `bun run lint` to check code quality with Biome
@@ -108,6 +140,10 @@ tsconfig.json                    # TypeScript configuration
 - Build: `bun run build`
 - Start production: `bun run start`
 - Deploy to Vercel or any Node.js hosting platform
+- Full stack with Docker: See `DOCKER.md` for setup, use `docker compose up --build`
+
+### Known Issues and TODOs
+- None currently identified.
 
 ### Security & Best Practices
 - Follow OWASP guidelines referenced in security instructions
