@@ -58,6 +58,7 @@ Edit `src/app/page.tsx` to modify the home page - changes auto-reload with Fast 
 - `bun run start` - Run production server
 - `bun run lint` - Lint code with Biome
 - `bun run format` - Format code with Biome
+- `bun run services` - Show Docker service status and URLs
 
 ### Full Stack with Docker
 
@@ -65,6 +66,12 @@ To run all services (frontend, auth, API, database):
 
 ```bash
 docker compose up --build
+```
+
+Check service status and access URLs:
+
+```bash
+bun run services
 ```
 
 See [DOCKER.md](./DOCKER.md) for detailed Docker setup instructions.
