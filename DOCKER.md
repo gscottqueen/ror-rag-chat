@@ -42,13 +42,25 @@ This repository includes a complete Docker Compose setup that orchestrates:
 2. **Build and Start Services**
    ```bash
    # Build and start all services
-   docker-compose up --build
+   docker compose up --build
    
    # Or run in background
-   docker-compose up --build -d
+   docker compose up --build -d
+
+   # with services
+   docker compose up --build -d && bun run show-services
    ```
 
-3. **Access Services**
+3. **Check Service Status**
+   ```bash
+   # Display all services with status and access URLs
+   ./show-services.sh
+   
+   # Or use npm/bun script
+   bun run services
+   ```
+
+4. **Access Services**
    - Frontend: http://localhost:3000
    - Auth Frontend: http://localhost:3001
    - Auth API: http://localhost:8000
@@ -104,12 +116,24 @@ All services run on the `app-network` bridge network, allowing internal communic
 - Database: PostgreSQL ready check
 - Auth API: HTTP health endpoint at `/health`
 
-## Stopping Services
+## Service Management
+
+### Check Status
+
+```bash
+# Show all services with status and URLs
+./show-services.sh
+
+# Or use the npm script
+bun run services
+```
+
+### Stopping Services
 
 ```bash
 # Stop all services
-docker-compose down
+docker compose down
 
 # Stop and remove volumes
-docker-compose down -v
+docker compose down -v
 ```
