@@ -69,7 +69,7 @@ export async function verifySession(): Promise<UserSession | null> {
           "X-API-Key": process.env.API_KEY || "",
         },
         body: JSON.stringify({ session }),
-      }
+      },
     );
 
     if (!response.ok) {
@@ -108,7 +108,7 @@ export async function deleteSession() {
             "X-API-Key": process.env.API_KEY || "",
           },
           body: JSON.stringify({ session }),
-        }
+        },
       );
     } catch (error) {
       console.error("Logout API error:", error);
