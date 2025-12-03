@@ -12,7 +12,9 @@ import {
 export default function Home() {
   const handleLogin = () => {
     const redirectUri = encodeURIComponent("/api/auth/callback");
-    const authUrl = `${process.env.AUTH_FRONTEND_URL || "http://localhost:3001"}/login?redirect_uri=${redirectUri}`;
+    const authUrl = `${
+      process.env.AUTH_FRONTEND_URL || "http://localhost:3001"
+    }/login?redirect_uri=${redirectUri}`;
     window.location.href = authUrl;
   };
 
