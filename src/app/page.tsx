@@ -17,7 +17,7 @@ export default function Home() {
             onClick={() =>
               (window.location.href = `${
                 process.env.AUTH_FRONTEND_URL || "http://localhost:3001"
-              }/login?redirect_uri=${encodeURIComponent('/api/auth/callback')}`)
+              }/login?redirect_uri=${encodeURIComponent("/api/auth/callback")}`)
             }
             className="px-3 py-3 rounded-sm text-gray-900"
           >
