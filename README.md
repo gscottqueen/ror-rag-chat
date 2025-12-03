@@ -16,6 +16,7 @@ For full Docker setup with all services, see [DOCKER.md](./DOCKER.md).
 ## Tech Stack
 
 **Main Application**:
+
 - Next.js 16.0.3 with App Router
 - React 19.2.0
 - TypeScript 5 (strict mode)
@@ -25,6 +26,7 @@ For full Docker setup with all services, see [DOCKER.md](./DOCKER.md).
 - Bun 1.0.0 (package manager)
 
 **Auth Services**:
+
 - Next.js 15.3.5 (frontend)
 - Express 5.1.0 (API)
 - PostgreSQL 15 (database)
