@@ -7,7 +7,7 @@ This is a **Next.js application** for building a RAG (Retrieval-Augmented Genera
 ## Critical
 
 - Always be extremely concise. Never overcomplicate when simplicity will do.
-- Use Docker as our services are running in containers
+- Always use Docker as our services are running in containers
 
 ## Repository Purpose
 
