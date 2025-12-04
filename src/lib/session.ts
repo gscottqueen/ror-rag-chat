@@ -60,7 +60,9 @@ export async function verifySession(): Promise<UserSession | null> {
   try {
     const response = await fetch(
       `${
-        process.env.API_URL || "http://localhost:8000"
+        process.env.API_URL ||
+        process.env.AUTH_API_URL ||
+        "http://localhost:8000"
       }/user-auth/verify-session`,
       {
         method: "POST",
@@ -100,7 +102,11 @@ export async function deleteSession() {
     // Notify API to invalidate session
     try {
       await fetch(
-        `${process.env.API_URL || "http://localhost:8000"}/user-auth/logout`,
+        `${
+          process.env.API_URL ||
+          process.env.AUTH_API_URL ||
+          "http://localhost:8000"
+        }/user-auth/logout`,
         {
           method: "POST",
           headers: {
