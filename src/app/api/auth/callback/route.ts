@@ -15,6 +15,6 @@ export async function GET(request: NextRequest) {
   // Set the session cookie
   await createSession(session, new Date(expiresAt));
 
-  // Redirect to home
-  return NextResponse.redirect(new URL("/", frontendUrl));
+  // Redirect to dashboard
+  return NextResponse.redirect(new URL("/dashboard", frontendUrl));
 }
