@@ -43,7 +43,6 @@ sequenceDiagram
 
     Note over AuthAPI: PBKDF2 password verification<br/>(10k iterations, SHA-512)
 
-    AuthAPI->>AuthAPI: 7. Generate JWT token<br/>(1hr expiration)
 
     AuthAPI->>DB: 8. INSERT INTO sessions<br/>(user_id, expires_at = now + 7 days)
     DB-->>AuthAPI: Session ID
@@ -58,7 +57,7 @@ sequenceDiagram
 
     MainApp->>MainApp: 12. Extract query params<br/>Set httpOnly cookie in main domain
 
-    MainApp->>User: 13. Redirect to homepage (authenticated)
+    MainApp->>User: 13. Redirect to /dashboard (authenticated)
 
     Note over User,DB: SESSION VERIFICATION FLOW
 
@@ -185,6 +184,7 @@ CREATE TABLE users (
 ### Main App API (src/app/api/auth/callback/route.ts)
 
 - `GET /api/auth/callback` - Handle auth callback and set session cookie
+- `GET /api/auth/check` - Check current authentication status
 
 ## Environment Variables
 
