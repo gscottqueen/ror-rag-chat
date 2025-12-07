@@ -1,5 +1,5 @@
 ---
-agent: 'agent'
+agent: agent
 description: 'Generate comprehensive copilot instructions for the repository'
 ---
 

@@ -1,0 +1,34 @@
+node_modules
+.next
+.git
+.gitignore
+.dockerignore
+Dockerfile
+README.md
+# Ignore auth submodule
+auth
+nextjs-auth-example
+# Ignore build artifacts
+.next
+out
+# Ignore cache
+.cache
+# Ignore logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+# Ignore OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+# Ignore IDE files
+.vscode
+.idea
+*.swp
+*.swo

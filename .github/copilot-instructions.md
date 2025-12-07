@@ -5,16 +5,20 @@
 This is a **Next.js application** for building a RAG (Retrieval-Augmented Generation) chat system. The project is currently in its early stages, using the latest Next.js 16 with App Router, React 19, and modern tooling for a robust, scalable web application.
 
 ## Critical
+
 - Always be extremely concise. Never overcomplicate when simplicity will do.
+- Always use Docker as our services are running in containers
 
 ## Repository Purpose
 
 ### Core Functions
+
 - **RAG Chat Interface** - Web-based chat application with retrieval-augmented generation capabilities
 - **Modern Web App** - Built with Next.js App Router for optimal performance and SEO
 - **Type-Safe Development** - Full TypeScript integration with strict mode enabled
 
 ### Target Users
+
 - **AI Coding Assistants** (GitHub Copilot, Claude, etc.)
 - **Development Teams** across organization repositories
 - **Project Maintainers** setting up new repositories
@@ -38,6 +42,8 @@ This is a **Next.js application** for building a RAG (Retrieval-Augmented Genera
 
 ## Repository Structure
 
+This is a monorepo with multiple services:
+
 ```
 .github/                        # GitHub templates and instructions
 ├── instructions/                # Development guidelines
@@ -48,38 +54,68 @@ This is a **Next.js application** for building a RAG (Retrieval-Augmented Genera
 ├── prompts/                     # AI assistant prompts
 ├── copilot-instructions.md      # This file
 └── pull_request_template.md     # PR template
-src/                             # Application source code
+src/                             # Main Next.js application source code
 ├── app/                         # Next.js App Router pages
 │   ├── globals.css              # Global styles with Tailwind
 │   ├── layout.tsx               # Root layout component
 │   └── page.tsx                 # Home page component
 ├── components/                  # Reusable React components
 │   └── ChatInput.tsx            # Chat input component
-public/                          # Static assets
-biome.json                       # Biome configuration
-next.config.ts                   # Next.js configuration
-package.json                     # Dependencies and scripts
+public/                          # Static assets for main app
+auth/                            # Authentication services
+├── api/                         # Node.js authentication API
+│   ├── src/                     # API source code
+│   ├── package.json             # API dependencies
+│   └── docker-compose.yml       # API Docker setup
+├── frontend/                    # Auth frontend (Next.js)
+│   ├── src/                     # Auth UI source code
+│   ├── package.json             # Auth frontend dependencies
+│   └── docker-compose.yml       # Auth frontend Docker setup
+└── docker-compose.yml           # Auth services orchestration
+api/                             # (Note: API is under auth/)
+frontend/                        # Additional frontend (Next.js setup)
+├── src/                         # Frontend source code
+├── package.json                 # Frontend dependencies
+└── docker-compose.yml           # Frontend Docker setup
+biome.json                       # Biome configuration (root)
+next.config.ts                   # Next.js configuration (root)
+package.json                     # Main app dependencies and scripts
 postcss.config.mjs               # PostCSS configuration
 tsconfig.json                    # TypeScript configuration
+docker-compose.yml               # Root Docker orchestration
+DOCKER.md                        # Docker setup documentation
+README.md                        # Project README
 ```
 
-## Key Files
+### Key Files
 
-### Core Application
+#### Core Application (Main Frontend)
+
 - `src/app/page.tsx` - Main home page component with chat interface
 - `src/app/layout.tsx` - Root layout with metadata and fonts
 - `src/app/globals.css` - Global CSS with Tailwind imports
 - `src/components/ChatInput.tsx` - Reusable chat input component
 
-### Configuration
-- `package.json` - Project metadata, dependencies, and scripts
-- `next.config.ts` - Next.js config with React Compiler enabled
-- `tsconfig.json` - TypeScript config with strict mode and path aliases
-- `biome.json` - Linting and formatting rules
+#### Configuration
+
+- `package.json` - Main app metadata, dependencies, and scripts
+- `next.config.ts` - Next.js config with React Compiler enabled and standalone output
+- `tsconfig.json` - TypeScript config with strict mode and path aliases (`@/*` for `./src/*`)
+- `biome.json` - Linting and formatting rules (2-space indentation, recommended rules)
 - `postcss.config.mjs` - PostCSS setup for Tailwind
 
-### Development Instructions
-- `.github/instructions/security.instructions.md` - Security implementation guidelines
+#### Docker and Deployment
+
+- `docker-compose.yml` - Orchestrates all services (main frontend, auth API, auth frontend, database)
+- `DOCKER.md` - Detailed Docker setup instructions
+- `auth/docker-compose.yml` - Auth services orchestration
+- `auth/api/package.json` - Auth API dependencies (Node.js with Knex, etc.)
+- `auth/frontend/package.json` - Auth frontend dependencies (Next.js with npm)
+- `frontend/package.json` - Additional frontend dependencies
+
+#### Development Instructions
+
+- `.github/instructions/security.instructions.md` - Security implementation guidelines (OWASP, input validation, etc.)
 - `.github/instructions/features.instructions.md` - Feature development workflow
 - `.github/instructions/a11y.instructions.md` - Accessibility standards
 - `.github/instructions/next-js.instructions.md` - Next.js specific rules
@@ -87,29 +123,44 @@ tsconfig.json                    # TypeScript configuration
 ## Development Guidelines
 
 ### Getting Started
+
 1. Install dependencies: `bun install`
 2. Start dev server: `bun run dev`
 3. Open [http://localhost:3000](http://localhost:3000)
 4. Edit files in `src/app/` - changes auto-reload
 
+For full stack development (with auth, API, database):
+
+1. Follow `DOCKER.md` for environment setup
+2. Run `docker compose up --build` to start all services
+
 ### Code Quality
+
 - **Linting**: Run `bun run lint` to check code quality with Biome
 - **Formatting**: Run `bun run format` to auto-format code
 - **TypeScript**: Strict mode enabled - all code must be type-safe
 - **Imports**: Use `@/*` alias for imports from `src/`
 
 ### Styling
+
 - Use Tailwind CSS classes for styling
 - Follow utility-first approach
 - Dark mode support with `dark:` prefixes
 - Custom CSS variables defined in `globals.css`
 
 ### Build & Deploy
+
 - Build: `bun run build`
 - Start production: `bun run start`
 - Deploy to Vercel or any Node.js hosting platform
+- Full stack with Docker: See `DOCKER.md` for setup, use `docker compose up --build`
+
+### Known Issues and TODOs
+
+- None currently identified.
 
 ### Security & Best Practices
+
 - Follow OWASP guidelines referenced in security instructions
 - Validate all inputs and sanitize outputs
 - Use HTTPS in production
@@ -118,12 +169,14 @@ tsconfig.json                    # TypeScript configuration
 ## Common Workflows
 
 ### Adding New Features
+
 1. Reference `features.instructions.md` for development process
 2. Create components in `src/components/` for reusability
 3. Update routing in `src/app/` for new pages
 4. Test with `bun run dev` and validate with `bun run lint`
 
 ### Code Changes
+
 1. Make changes to TypeScript/TSX files
 2. Run `bun run format` to format code
 3. Run `bun run lint` to check for issues
@@ -131,6 +184,7 @@ tsconfig.json                    # TypeScript configuration
 5. Commit with descriptive messages
 
 ### Dependency Management
+
 - Use `bun add` to install new packages
 - Update `package.json` and commit lockfile changes
 - Run security audits regularly
@@ -138,7 +192,9 @@ tsconfig.json                    # TypeScript configuration
 ## Usage Examples
 
 ### For AI Assistants
+
 When working on this repository, you should:
+
 - Read relevant instruction files before implementing features
 - Use Bun commands for all package management and scripts
 - Follow TypeScript strict mode and Biome rules
@@ -146,7 +202,9 @@ When working on this repository, you should:
 - Test changes locally before suggesting commits
 
 ### For Developers
+
 When contributing to this project:
+
 - Follow the established coding standards
 - Use the provided scripts for development workflow
 - Reference instruction files for specific guidelines
@@ -154,7 +212,9 @@ When contributing to this project:
 - Test thoroughly before submitting PRs
 
 ### For Project Setup
+
 When setting up the development environment:
+
 - Install Bun runtime
 - Clone repository and run `bun install`
 - Start with `bun run dev`
@@ -166,6 +226,7 @@ When setting up the development environment:
 - Use structured formats for reproducible results
 
 ### Prompt Engineering Best Practices
+
 - Start with clear task definitions and expected outcomes
 - Include relevant context and constraints
 - Structure prompts with headers, lists, and examples
@@ -173,6 +234,7 @@ When setting up the development environment:
 - Test prompts with different scenarios
 
 ### Template Development
+
 - Use YAML frontmatter for metadata and configuration
 - Follow consistent naming patterns across all templates
 - Include clear descriptions and usage examples
@@ -181,6 +243,7 @@ When setting up the development environment:
 ## Common Workflows
 
 ### Creating New Instructions
+
 1. Use the `create-instructions.prompt.md` template as a guide
 2. Follow the standard instruction format with YAML frontmatter specifying `applyTo` patterns
 3. Include clear goals, essentials, and practical reference resources
@@ -188,18 +251,21 @@ When setting up the development environment:
 5. Focus on actionable guidelines rather than abstract concepts
 
 ### Feature Development Process
+
 1. Reference `features.instructions.md` for the human-in-the-loop workflow
 2. Create feature briefs in `.backups/features/` during planning
 3. Use the todo list management for tracking progress
 4. Follow security and accessibility guidelines throughout
 
 ### Adding New Prompts
+
 1. Create `.prompt.md` files in the `prompts/` directory
 2. Include YAML frontmatter with mode and description
 3. Structure with clear goals, limitations, and expected outputs
 4. Reference relevant instruction files
 
 ### Template Maintenance
+
 - Regularly review and update templates based on usage feedback
 - Ensure consistency across all template formats
 - Update references to instruction files when they change
@@ -208,21 +274,27 @@ When setting up the development environment:
 ## Usage Examples
 
 ### For AI Assistants
+
 When an AI assistant encounters this repository, it should:
+
 - Read this file first for context and guidelines
 - Reference specific instruction files based on the task at hand
 - Use prompts as structured workflows for complex tasks
 - Follow established patterns when creating new content
 
 ### For Development Teams
+
 Teams using this shared repository should:
+
 - Copy relevant templates to their project repositories
 - Customize instruction files for project-specific needs
 - Contribute improvements back to shared templates
 - Follow the established development workflows
 
 ### For Project Setup
+
 When setting up a new repository:
+
 - Copy relevant instruction files to the new project
 - Customize copilot-instructions.md for the specific project
 - Update template references and project-specific details
