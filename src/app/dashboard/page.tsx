@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
+import ChatBot from "@/components/ChatBot";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -25,24 +26,23 @@ async function DashboardContent() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle>Dashboard</CardTitle>
-          <CardDescription>Welcome to your personal dashboard</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
+    <div className="h-screen flex flex-col">
+      <header className="p-1 bg-white shadow flex justify-between items-center">
+        <div>
           <h1 className="text-2xl font-bold">
             Hello {user.first_name} {user.last_name}!
           </h1>
           <p className="text-gray-600">Email: {user.email}</p>
-          <form action={handleLogout}>
-            <Button type="submit" variant="outline" className="w-full">
-              Logout
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+        </div>
+        <form action={handleLogout}>
+          <Button type="submit" variant="outline">
+            Logout
+          </Button>
+        </form>
+      </header>
+      <div className="flex-1">
+        <ChatBot />
+      </div>
     </div>
   );
 }
