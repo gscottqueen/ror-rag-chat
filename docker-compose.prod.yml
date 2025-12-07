@@ -4,22 +4,14 @@
 services:
   # Main Next.js Application
   frontend:
-    labels:
-      shipyard.route: "/"
     build:
       context: .
-      dockerfile: Dockerfile
-    # Mount source for live reload and ensure node_modules persistence
-    volumes:
-      - ./:/app:cached
-      - /app/node_modules
+      dockerfile: Dockerfile.prod
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - AUTH_API_URL=http://auth-api:8000
-      - HOST=0.0.0.0
-    command: sh -c "bun install --no-save || true && bun run dev -- -H 0.0.0.0"
     depends_on:
       auth-api:
         condition: service_healthy
@@ -27,7 +19,7 @@ services:
         condition: service_healthy
     networks:
       - app-network
-    restart: always
+    restart: unless-stopped
 
   # Authentication Frontend Service
   auth-frontend:
@@ -37,7 +29,7 @@ services:
     ports:
       - "3001:3000"
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - API_URL=http://auth-api:8000
       - API_KEY=${API_KEY}
     depends_on:
@@ -55,7 +47,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=${NODE_ENV:-production}
       - PORT=8000
       - DB_HOST=auth-db
       - DB_PORT=5432
@@ -157,8 +149,4 @@ networks:
 # Volume configuration
 volumes:
   auth_postgres_data:
-    driver: local
-  frontend_node_modules:
-    driver: local
-  frontend_next:
     driver: local
