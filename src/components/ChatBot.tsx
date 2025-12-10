@@ -13,15 +13,8 @@ import {
 } from "@/components/ai-elements/message";
 import {
   PromptInput,
-  PromptInputActionAddAttachments,
-  PromptInputActionMenu,
-  PromptInputActionMenuContent,
-  PromptInputActionMenuTrigger,
-  PromptInputAttachment,
-  PromptInputAttachments,
   PromptInputBody,
-  PromptInputButton,
-  PromptInputHeader,
+  PromptInputFooter,
   type PromptInputMessage,
   PromptInputSelect,
   PromptInputSelectContent,
@@ -30,7 +23,6 @@ import {
   PromptInputSelectValue,
   PromptInputSubmit,
   PromptInputTextarea,
-  PromptInputFooter,
   PromptInputTools,
 } from "@/components/ai-elements/prompt-input";
 import { useState } from "react";
@@ -62,15 +54,12 @@ const ChatBot = () => {
   const { messages, sendMessage, status, regenerate } = useChat();
 
   const handleSubmit = (message: PromptInputMessage) => {
-    const hasText = Boolean(message.text);
-    const hasAttachments = Boolean(message.files?.length);
-    if (!(hasText || hasAttachments)) {
+    if (!message.text) {
       return;
     }
     sendMessage(
       {
-        text: message.text || "Sent with attachments",
-        files: message.files,
+        text: message.text,
       },
       {
         body: {
@@ -167,17 +156,7 @@ const ChatBot = () => {
           </ConversationContent>
           <ConversationScrollButton />
         </Conversation>
-        <PromptInput
-          onSubmit={handleSubmit}
-          className="mt-4"
-          globalDrop
-          multiple
-        >
-          <PromptInputHeader>
-            <PromptInputAttachments>
-              {(attachment) => <PromptInputAttachment data={attachment} />}
-            </PromptInputAttachments>
-          </PromptInputHeader>
+        <PromptInput onSubmit={handleSubmit} className="mt-4">
           <PromptInputBody>
             <PromptInputTextarea
               onChange={(e) => setInput(e.target.value)}
@@ -186,12 +165,6 @@ const ChatBot = () => {
           </PromptInputBody>
           <PromptInputFooter>
             <PromptInputTools>
-              <PromptInputActionMenu>
-                <PromptInputActionMenuTrigger />
-                <PromptInputActionMenuContent>
-                  <PromptInputActionAddAttachments />
-                </PromptInputActionMenuContent>
-              </PromptInputActionMenu>
               <PromptInputSelect
                 onValueChange={(value) => {
                   setModel(value);
