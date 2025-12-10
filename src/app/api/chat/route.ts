@@ -1,8 +1,8 @@
 import {
   convertToModelMessages,
+  type LanguageModel,
   streamText,
   type UIMessage,
-  type LanguageModel,
 } from "ai";
 import { getLocalModel } from "@/lib/providers";
 

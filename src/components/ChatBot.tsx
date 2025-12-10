@@ -1,15 +1,19 @@
 "use client";
+import { useChat } from "@ai-sdk/react";
+import { CopyIcon, RefreshCcwIcon } from "lucide-react";
+import { useState } from "react";
 import {
   Conversation,
   ConversationContent,
   ConversationScrollButton,
 } from "@/components/ai-elements/conversation";
+import { Loader } from "@/components/ai-elements/loader";
 import {
   Message,
+  MessageAction,
+  MessageActions,
   MessageContent,
   MessageResponse,
-  MessageActions,
-  MessageAction,
 } from "@/components/ai-elements/message";
 import {
   PromptInput,
@@ -25,21 +29,17 @@ import {
   PromptInputTextarea,
   PromptInputTools,
 } from "@/components/ai-elements/prompt-input";
-import { useState } from "react";
-import { useChat } from "@ai-sdk/react";
-import { CopyIcon, RefreshCcwIcon } from "lucide-react";
+import {
+  Reasoning,
+  ReasoningContent,
+  ReasoningTrigger,
+} from "@/components/ai-elements/reasoning";
 import {
   Source,
   Sources,
   SourcesContent,
   SourcesTrigger,
 } from "@/components/ai-elements/sources";
-import {
-  Reasoning,
-  ReasoningContent,
-  ReasoningTrigger,
-} from "@/components/ai-elements/reasoning";
-import { Loader } from "@/components/ai-elements/loader";
 
 const models = [
   {
@@ -66,7 +66,7 @@ const ChatBot = () => {
           model: model,
           local: true,
         },
-      }
+      },
     );
     setInput("");
   };
@@ -85,7 +85,7 @@ const ChatBot = () => {
                       <SourcesTrigger
                         count={
                           message.parts.filter(
-                            (part) => part.type === "source-url"
+                            (part) => part.type === "source-url",
                           ).length
                         }
                       />
