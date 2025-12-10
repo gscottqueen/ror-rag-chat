@@ -82,7 +82,7 @@ For development, you can run individual services:
 docker-compose up auth-db
 
 # Start auth API in development mode
-cd auth/api && npm run serve
+cd auth/api && npm run dev
 
 # Start frontend in development mode
 bun run dev
