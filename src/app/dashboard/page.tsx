@@ -27,13 +27,7 @@ async function DashboardContent() {
 
   return (
     <div className="h-screen flex flex-col">
-      <header className="p-1 bg-white shadow flex justify-between items-center">
-        <div>
-          <h1 className="text-2xl font-bold">
-            Hello {user.first_name} {user.last_name}!
-          </h1>
-          <p className="text-gray-600">Email: {user.email}</p>
-        </div>
+      <header className="absolute top-0 right-0 p-2 bg-white flex items-center justify-end">
         <form action={handleLogout}>
           <Button type="submit" variant="outline">
             Logout
