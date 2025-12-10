@@ -170,6 +170,7 @@ export const ModelSelectorLogo = ({
   className,
   ...props
 }: ModelSelectorLogoProps) => (
+  // biome-ignore lint/performance/noImgElement: External provider logos from models.dev cannot use Next.js Image
   <img
     {...props}
     alt={`${provider} logo`}
@@ -189,7 +190,7 @@ export const ModelSelectorLogoGroup = ({
   <div
     className={cn(
       "-space-x-1 flex shrink-0 items-center [&>img]:rounded-full [&>img]:bg-background [&>img]:p-px [&>img]:ring-1 dark:[&>img]:bg-foreground",
-      className,
+      className
     )}
     {...props}
   />

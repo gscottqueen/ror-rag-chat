@@ -12,12 +12,13 @@ export const Image = ({
   mediaType,
   ...props
 }: ImageProps) => (
+  // biome-ignore lint/performance/noImgElement: Dynamic base64 images from AI generation cannot use Next.js Image
   <img
     {...props}
     alt={props.alt}
     className={cn(
       "h-auto max-w-full overflow-hidden rounded-md",
-      props.className,
+      props.className
     )}
     src={`data:${mediaType};base64,${base64}`}
   />
