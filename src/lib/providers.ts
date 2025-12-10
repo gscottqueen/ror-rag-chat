@@ -16,7 +16,7 @@ export const getLocalModel = (modelName: string) => {
 // Function for non-streaming local LLM calls
 export const askLocalLLMQuestion = async (
   input: string,
-  modelName: string = ""
+  modelName: string = "",
 ) => {
   const model = getLocalModel(modelName);
   const { text } = await generateText({
