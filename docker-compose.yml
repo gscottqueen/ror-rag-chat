@@ -19,6 +19,7 @@ services:
       - NODE_ENV=development
       - AUTH_API_URL=http://auth-api:8000
       - HOST=0.0.0.0
+      - AI_LOCAL_LLM_URL=http://host.docker.internal:11434/v1
     command: sh -c "bun install --no-save || true && bun run dev -- -H 0.0.0.0"
     depends_on:
       auth-api:
