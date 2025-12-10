@@ -35,7 +35,7 @@ import {
 } from "@/components/ai-elements/prompt-input";
 import { useState } from "react";
 import { useChat } from "@ai-sdk/react";
-import { CopyIcon, GlobeIcon, RefreshCcwIcon } from "lucide-react";
+import { CopyIcon, RefreshCcwIcon } from "lucide-react";
 import {
   Source,
   Sources,
@@ -48,21 +48,19 @@ import {
   ReasoningTrigger,
 } from "@/components/ai-elements/reasoning";
 import { Loader } from "@/components/ai-elements/loader";
+
 const models = [
   {
-    name: "GPT 4o",
-    value: "openai/gpt-4o",
-  },
-  {
-    name: "Deepseek R1",
-    value: "deepseek/deepseek-r1",
+    name: "Local:",
+    value: "gpt-oss:20b",
+    local: true,
   },
 ];
 const ChatBot = () => {
   const [input, setInput] = useState("");
   const [model, setModel] = useState<string>(models[0].value);
-  const [webSearch, setWebSearch] = useState(false);
   const { messages, sendMessage, status, regenerate } = useChat();
+
   const handleSubmit = (message: PromptInputMessage) => {
     const hasText = Boolean(message.text);
     const hasAttachments = Boolean(message.files?.length);
@@ -77,12 +75,13 @@ const ChatBot = () => {
       {
         body: {
           model: model,
-          webSearch: webSearch,
+          local: true,
         },
       }
     );
     setInput("");
   };
+
   return (
     <div className="max-w-4xl mx-auto p-6 relative size-full h-screen">
       <div className="flex flex-col h-full">
@@ -193,13 +192,6 @@ const ChatBot = () => {
                   <PromptInputActionAddAttachments />
                 </PromptInputActionMenuContent>
               </PromptInputActionMenu>
-              <PromptInputButton
-                variant={webSearch ? "default" : "ghost"}
-                onClick={() => setWebSearch(!webSearch)}
-              >
-                <GlobeIcon size={16} />
-                <span>Search</span>
-              </PromptInputButton>
               <PromptInputSelect
                 onValueChange={(value) => {
                   setModel(value);
@@ -215,7 +207,7 @@ const ChatBot = () => {
                       key={model.value}
                       value={model.value}
                     >
-                      {model.name}
+                      {model.name} ({model.value})
                     </PromptInputSelectItem>
                   ))}
                 </PromptInputSelectContent>
